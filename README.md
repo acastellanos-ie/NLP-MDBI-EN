@@ -1,17 +1,39 @@
-# Natural Language Processing
-Repository for the Natural Language Processing class
+# Natural Language Processing — from tokens to a working AI system
 
-In this repository you will find all the technical materials related to this course (notebooks, scripts, files,...).
+Welcome. Over this course you won't just learn NLP techniques in isolation — **you will build one real system, piece by piece, across every session, and watch it come together at the end.**
 
-Please read carefully the following instructions to setup the environment needed for the practices
+The system is the **Helcon Support Copilot**. *Helcon* is a fictional software company whose support team is drowning in customer tickets. Week by week we build the AI that triages those tickets, answers them from the company's help center, and knows when to escalate. Every session adds a real component; the final session assembles all of them into a copilot you can run end to end.
 
-# Using the NLP environment
+## The journey
 
-This section covers the instructions to execute them.
+Each session is a standalone lesson *and* a step in the build. The running thread is the company (**Helcon**) and a shared dataset that grows with you.
 
-As we will cover in class, the most advanced NLP methodologies nowadays are based on Deep Learning models. These models, while providing an impressive performance in many task, have the limitation of their complexity and the computation power they require.
+| # | Session | What you learn | What you build for Helcon |
+|---|---|---|---|
+| 01 | [Introduction](01_introduction) | Meet the company and the data the whole course is built on. | A tour of Helcon's tickets, help center, and the hard cases to come. |
+| 03 | [Linguistic structure & interpretability](03_linguistic_structure_and_interpretability) | How classical grammar parses language and why structure isn't meaning. How attention really works inside BERT. | A rule-based ticket reader… that breaks on real customer language ("my refund was *never* processed"). The motivation for everything next. |
+| 04 | [Dense semantics](04_semantics) | Embeddings: turning meaning into geometry. Similarity, search, and the blind spots (negation, bias). | A semantic search over Helcon's tickets. The same engine that becomes the retriever in session 07. |
+| 05 | [Language modeling](05_language_modeling) | What "Generative AI" physically is: predicting the next token. Decoding, temperature, and why models hallucinate fluently. | A measure of which tickets *surprise* the model and the intuition for why a grounded system needs evidence, not fluency. |
+| 06 | [Transfer learning & fine-tuning](06_transfer_learning_and_fine_tuning) | Classic baselines vs. fine-tuning vs. LoRA vs. zero-shot vs. prompting judged on one fair leaderboard (accuracy, cost, latency). | **Helcon's triage model**: a classifier that routes each ticket to the right queue. Shipped as a 3 MB LoRA adapter the rest of the course reuses. |
+| 07 | [Information retrieval & RAG](07_rag) | How search engines rank (TF-IDF, BM25, dense), measured on a real benchmark. How Retrieval-Augmented Generation grounds an LLM in your documents. | **Helcon's retriever**: RAG over the help center, with citations and a live demo of *poisoning* the index to see why grounding ≠ truth. |
+| 08 | [Agentic AI](08_agentic_ai) | How an LLM becomes an agent that reasons and uses tools and what that costs. Why production agents use native tool-calling. | The copilot's **brain**: an agent whose tools are the triage model (06) and the retriever (07), reasoning out loud. |
+| 09 | [Final project](09_final_project) | Putting it together and **measuring every decision**: chunking, retriever choice, faithfulness, and the failure modes of real RAG systems. | **The whole Helcon Support Copilot**, end to end: a ticket comes in → it's triaged → answered from policy with citations → or refused. Every piece you built, running together. |
 
-In particular, in order to use these models, it is highly recommended to have a GPU at your disposal. As I imagine that most of you do not have one in your compute, my recommendation is to leverage [Google Colab](https://colab.research.google.com/).
+## How the pieces connect
 
-Google Colab provides you an environment in which you can execute Python code and have access to GPUs. If you want to execute any of the notebooks in this repository in Colab, you can just click on the Open in Colab button at the beggining of each notebook
+The course ships a small shared "company data + tools" folder, [`system/`](system/), that every notebook loads through one helper (`system_io.py`):
 
+- **the data** — Helcon's support tickets, help-center articles, and policies — so every session works on the *same* company, not a different toy dataset each week;
+- **the artifacts** — the triage model from session 06, the retriever config from session 07 — so a component you build once is reused downstream, exactly like a real ML team's model registry.
+
+## Running the notebooks
+
+These labs are built for **Google Colab** (free tier). Click the **Open in Colab** badge at the top of any notebook, then run the first ("Setup") cell that installs the libraries, downloads the models, and pulls in the shared Helcon data. Sessions that train or run larger models will ask you to enable a **GPU runtime** (Runtime → Change runtime type → T4).
+
+## About the data
+
+*Helcon* is fictional and its data is **manufactured for teaching**. The tickets, help-center articles, and policies were written for this course (the support-ticket structure mirrors public customer-support datasets). It is free to use and reuse. Nothing here is a real company or real customer data.
+
+---
+
+*The best way to finish this course is to be able to say: "I built that — all of it."* See you in session 03.
