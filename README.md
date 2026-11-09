@@ -1,30 +1,27 @@
-# Natural Language Processing — from tokens to a working AI system
+# Natural Language Processing
 
-Welcome. Over this course you won't just learn NLP techniques in isolation — **you will build one real system, piece by piece, across every session, and watch it come together at the end.**
+This repository contains the notebooks used in class. They are built as live demonstrations: the code is ready, but the result is revealed, checked and discussed as the notebook runs.
 
-The system is the **Helcon Support Copilot**. *Helcon* is a fictional software company whose support team is drowning in customer tickets. Week by week we build the AI that triages those tickets, answers them from the company's help center, and knows when to escalate. Every session adds a real component; the final session assembles all of them into a copilot you can run end to end.
+The notebooks are not a sequence of coding exercises. Each one starts from a concrete question, changes one thing at a time and finishes by testing where the method breaks.
 
-## The journey
+## Course map
 
-Each session is a standalone lesson *and* a step in the build. The running thread is the company (**Helcon**) and a shared dataset that grows with you.
+| Session | Notebook | Main question |
+| --- | --- | --- |
+| Linguistic structure | [Dependency parsing](03_linguistic_structure_and_interpretability/dependency_parsing.ipynb) | What does a dependency parser recover, and how stable is the analysis? |
+| Linguistic structure | [Attention](03_linguistic_structure_and_interpretability/attention.ipynb) | What changes inside a transformer when context changes? |
+| Language modelling | [Next-token prediction](05_language_modeling/language_modeling.ipynb) | How do local token probabilities become generated text? |
+| Transfer learning | [Fine-tuning a classifier](06_transfer_learning_and_fine_tuning/transfer_learning_and_fine_tuning.ipynb) | Does a fine-tuned transformer beat a strong lexical baseline? |
+| Retrieval | [Sparse and dense retrieval](07_rag/information_retrieval.ipynb) | How do lexical and semantic retrieval fail differently? |
+| Question answering | [Extractive QA](07_rag/question_answering.ipynb) | What happens when the answer is absent or the context is wrong? |
+| RAG | [RAG step by step](07_rag/rag_step_by_step.ipynb) | Which part of a RAG answer came from retrieval and which part came from generation? |
 
-| # | Session | What you learn | What you build for Helcon |
-|---|---|---|---|
-| 01 | [Introduction](01_introduction) | Meet the company and the data the whole course is built on. | A tour of Helcon's tickets, help center, and the hard cases to come. |
-| 02 | [Linguistic structure & interpretability](03_linguistic_structure_and_interpretability) | How classical grammar parses language and why structure isn't meaning. How attention really works inside BERT. | A rule-based ticket reader… that breaks on real customer language ("my refund was *never* processed"). The motivation for everything next. |
-| 03 | [Language modeling](05_language_modeling) | What "Generative AI" physically is: predicting the next token. Decoding, temperature, and why models hallucinate fluently. | A measure of which tickets *surprise* the model and the intuition for why a grounded system needs evidence, not fluency. |
-| 04 | [Transfer learning & fine-tuning](06_transfer_learning_and_fine_tuning) | Classic baselines vs. fine-tuning vs. LoRA vs. zero-shot vs. prompting judged on one fair leaderboard (accuracy, cost, latency). | **Helcon's triage model**: a classifier that routes each ticket to the right queue. Shipped as a 3 MB LoRA adapter the rest of the course reuses. |
-| 05 | [Information retrieval & RAG](07_rag) | How search engines rank (TF-IDF, BM25, dense), measured on a real benchmark. How Retrieval-Augmented Generation grounds an LLM in your documents. | **Helcon's retriever**: RAG over the help center, with citations and a live demo of *poisoning* the index to see why grounding ≠ truth. |
+The three retrieval notebooks are meant to run in that order: retrieval first, then reader behaviour, then the complete RAG pipeline.
 
+## Data
+
+The disaster-tweet files used in the transfer-learning practice come from Kaggle's [Natural Language Processing with Disaster Tweets](https://www.kaggle.com/competitions/nlp-getting-started) competition and remain subject to its competition rules.
 
 ## Running the notebooks
 
-These labs are built for **Google Colab** (free tier). Click the **Open in Colab** badge at the top of any notebook, then run the first ("Setup") cell that installs the libraries, downloads the models, and pulls in the shared Helcon data. Sessions that train or run larger models will ask you to enable a **GPU runtime** (Runtime → Change runtime type → T4).
-
-## About the data
-
-*Helcon* is fictional and its data is **manufactured for teaching**. The tickets, help-center articles, and policies were written for this course (the support-ticket structure mirrors public customer-support datasets). It is free to use and reuse. Nothing here is a real company or real customer data.
-
----
-
-*The best way to finish this course is to be able to say: "I built that — all of it."* See you in session 03.
+Each notebook has an **Open in Colab** button at the top and installs its direct dependencies. Select a GPU runtime for the fine-tuning, agentic AI and course-synthesis notebooks. DistilBERT fine-tuning also runs on CPU, but its three training epochs take substantially longer; the local Qwen examples require a GPU.
