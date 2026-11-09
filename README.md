@@ -16,12 +16,6 @@ Each session is a standalone lesson *and* a step in the build. The running threa
 | 04 | [Transfer learning & fine-tuning](06_transfer_learning_and_fine_tuning) | Classic baselines vs. fine-tuning vs. LoRA vs. zero-shot vs. prompting judged on one fair leaderboard (accuracy, cost, latency). | **Helcon's triage model**: a classifier that routes each ticket to the right queue. Shipped as a 3 MB LoRA adapter the rest of the course reuses. |
 | 05 | [Information retrieval & RAG](07_rag) | How search engines rank (TF-IDF, BM25, dense), measured on a real benchmark. How Retrieval-Augmented Generation grounds an LLM in your documents. | **Helcon's retriever**: RAG over the help center, with citations and a live demo of *poisoning* the index to see why grounding ≠ truth. |
 
-## How the pieces connect
-
-The course ships a small shared "company data + tools" folder, [`system/`](system/), that every notebook loads through one helper (`system_io.py`):
-
-- **the data** — Helcon's support tickets, help-center articles, and policies — so every session works on the *same* company, not a different toy dataset each week;
-- **the artifacts** — the triage model from session 06, the retriever config from session 07 — so a component you build once is reused downstream, exactly like a real ML team's model registry.
 
 ## Running the notebooks
 
