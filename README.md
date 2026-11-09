@@ -11,20 +11,11 @@ Each session is a standalone lesson *and* a step in the build. The running threa
 | # | Session | What you learn | What you build for Helcon |
 |---|---|---|---|
 | 01 | [Introduction](01_introduction) | Meet the company and the data the whole course is built on. | A tour of Helcon's tickets, help center, and the hard cases to come. |
-| 03 | [Linguistic structure & interpretability](03_linguistic_structure_and_interpretability) | How classical grammar parses language and why structure isn't meaning. How attention really works inside BERT. | A rule-based ticket reader… that breaks on real customer language ("my refund was *never* processed"). The motivation for everything next. |
-| 04 | [Dense semantics](04_semantics) | Embeddings: turning meaning into geometry. Similarity, search, and the blind spots (negation, bias). | A semantic search over Helcon's tickets. The same engine that becomes the retriever in session 07. |
-| 05 | [Language modeling](05_language_modeling) | What "Generative AI" physically is: predicting the next token. Decoding, temperature, and why models hallucinate fluently. | A measure of which tickets *surprise* the model and the intuition for why a grounded system needs evidence, not fluency. |
-| 06 | [Transfer learning & fine-tuning](06_transfer_learning_and_fine_tuning) | Classic baselines vs. fine-tuning vs. LoRA vs. zero-shot vs. prompting judged on one fair leaderboard (accuracy, cost, latency). | **Helcon's triage model**: a classifier that routes each ticket to the right queue. Shipped as a 3 MB LoRA adapter the rest of the course reuses. |
-| 07 | [Information retrieval & RAG](07_rag) | How search engines rank (TF-IDF, BM25, dense), measured on a real benchmark. How Retrieval-Augmented Generation grounds an LLM in your documents. | **Helcon's retriever**: RAG over the help center, with citations and a live demo of *poisoning* the index to see why grounding ≠ truth. |
-| 08 | [Agentic AI](08_agentic_ai) | How an LLM becomes an agent that reasons and uses tools and what that costs. Why production agents use native tool-calling. | The copilot's **brain**: an agent whose tools are the triage model (06) and the retriever (07), reasoning out loud. |
-| 09 | [Final project](09_final_project) | Putting it together and **measuring every decision**: chunking, retriever choice, faithfulness, and the failure modes of real RAG systems. | **The whole Helcon Support Copilot**, end to end: a ticket comes in → it's triaged → answered from policy with citations → or refused. Every piece you built, running together. |
+| 02 | [Linguistic structure & interpretability](03_linguistic_structure_and_interpretability) | How classical grammar parses language and why structure isn't meaning. How attention really works inside BERT. | A rule-based ticket reader… that breaks on real customer language ("my refund was *never* processed"). The motivation for everything next. |
+| 03 | [Language modeling](05_language_modeling) | What "Generative AI" physically is: predicting the next token. Decoding, temperature, and why models hallucinate fluently. | A measure of which tickets *surprise* the model and the intuition for why a grounded system needs evidence, not fluency. |
+| 04 | [Transfer learning & fine-tuning](06_transfer_learning_and_fine_tuning) | Classic baselines vs. fine-tuning vs. LoRA vs. zero-shot vs. prompting judged on one fair leaderboard (accuracy, cost, latency). | **Helcon's triage model**: a classifier that routes each ticket to the right queue. Shipped as a 3 MB LoRA adapter the rest of the course reuses. |
+| 05 | [Information retrieval & RAG](07_rag) | How search engines rank (TF-IDF, BM25, dense), measured on a real benchmark. How Retrieval-Augmented Generation grounds an LLM in your documents. | **Helcon's retriever**: RAG over the help center, with citations and a live demo of *poisoning* the index to see why grounding ≠ truth. |
 
-## How the pieces connect
-
-The course ships a small shared "company data + tools" folder, [`system/`](system/), that every notebook loads through one helper (`system_io.py`):
-
-- **the data** — Helcon's support tickets, help-center articles, and policies — so every session works on the *same* company, not a different toy dataset each week;
-- **the artifacts** — the triage model from session 06, the retriever config from session 07 — so a component you build once is reused downstream, exactly like a real ML team's model registry.
 
 ## Running the notebooks
 
